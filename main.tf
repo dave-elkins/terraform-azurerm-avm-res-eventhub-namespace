@@ -23,8 +23,6 @@ resource "azurerm_eventhub_namespace" "this" {
   minimum_tls_version           = 1.2
   public_network_access_enabled = var.public_network_access_enabled
 
-  zone_redundant = var.zone_redundant
-
   dynamic "identity" {
     for_each = var.managed_identities != {} ? { this = var.managed_identities } : {}
     content {
@@ -32,7 +30,6 @@ resource "azurerm_eventhub_namespace" "this" {
       identity_ids = identity.value.user_assigned_resource_ids
     }
   }
-
 
   dynamic "network_rulesets" {
     for_each = var.network_rulesets != null ? { this = var.network_rulesets } : {}
