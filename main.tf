@@ -87,7 +87,7 @@ resource "azurerm_role_assignment" "this" {
 }
 
 resource "azurerm_eventhub_namespace_customer_managed_key" "this" {
-  count = var.customer_managed_key != {} : 1 : 0
+  count = var.customer_managed_key != {} ? 1 : 0
 
   eventhub_namespace_id     = azurerm_eventhub_namespace.this[0].id
   key_vault_key_ids         = [azurerm_key_vault_key.this[0].id]
@@ -95,7 +95,7 @@ resource "azurerm_eventhub_namespace_customer_managed_key" "this" {
 }
 
 data "azurerm_key_vault_key" "this" {
-  count = var.customer_managed_key != {} : 1 : 0
+  count = var.customer_managed_key != {} ? 1 : 0
 
    key_vault_id = var.customer_managed_key.key_vault_resource_id
    name         = var.customer_managed_key.key_name
