@@ -1,7 +1,5 @@
 variable "event_hubs" {
   type = map(object({
-    namespace_name      = string
-    resource_group_name = string
     partition_count     = number
     message_retention   = number
     capture_description = optional(object({
