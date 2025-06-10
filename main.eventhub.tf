@@ -23,6 +23,10 @@ resource "azurerm_eventhub" "this" {
       }
     }
   }
+
+  depends_on = [
+    azurerm_eventhub_namespace_customer_managed_key.this
+  ]
 }
 
 resource "azurerm_role_assignment" "event_hubs" {
